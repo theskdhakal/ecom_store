@@ -1,10 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import { MainLayout } from "../../components/layout/main-layout/MainLayout";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { CustomInput } from "../../components/custom-input/CustomInput";
+import { useDispatch } from "react-redux";
+import { registerUserAction } from "../../components/user/UserAction";
 
 export const Register = () => {
+  const dispatch = useDispatch();
+
+  const [form, setForm] = useState();
+
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+
+    setForm({ ...form, [name]: value });
+  };
+
+  const handleOnSubmit = async (e) => {
+    e.preventDefault();
+
+    console.log(form);
+    await registerUserAction(form);
+  };
   const input = [
     {
       label: "First Name",
@@ -48,6 +66,7 @@ export const Register = () => {
         <Form
           style={{ width: "550px" }}
           className="border p-3 rounded m-3 shadow-lg m-5 p-5"
+          onSubmit={handleOnSubmit}
         >
           <Form.Text className="text-center ">
             <h2>Please register Admin</h2>
@@ -55,7 +74,7 @@ export const Register = () => {
 
           <div className="mt-5">
             {input.map((item, i) => (
-              <CustomInput key={i} {...item} />
+              <CustomInput key={i} {...item} onChange={handleOnChange} />
             ))}
 
             <div className="d-grid">

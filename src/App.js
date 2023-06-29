@@ -11,21 +11,25 @@ import { Payment } from "./pages/payment-option/Payment";
 import { Clients } from "./pages/clients/Clients";
 import { Review } from "./pages/reviews/Review";
 import { Order } from "./pages/order/Order";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/category" element={<Category />} />
-      <Route path="/product" element={<Product />} />
-      <Route path="/payment" element={<Payment />} />
-      <Route path="/client" element={<Clients />} />
-      <Route path="/order" element={<Order />} />
-      <Route path="/review" element={<Review />} />
-    </Routes>
+    <div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/category" element={<Category />} />
+        <Route path="/product" element={<Product />} />
+        <Route path="/payment" element={<Payment />} />
+        <Route path="/client" element={<Clients />} />
+        <Route path="/order" element={<Order />} />
+        <Route path="/review" element={<Review />} />
+      </Routes>
+      <ToastContainer />
+    </div>
   );
 }
 
