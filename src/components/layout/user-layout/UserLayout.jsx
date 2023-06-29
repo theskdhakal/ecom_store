@@ -9,7 +9,7 @@ export const UserLayout = ({ children }) => {
       <Header />
 
       <Row className="user-layout">
-        <Col className="left">
+        <Col md={2} className="left">
           <h5>user title</h5>
           <hr />
           <ul>
