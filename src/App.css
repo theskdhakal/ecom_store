@@ -1,3 +1,8 @@
+* {
+  box-sizing: border-box;
+  font-family: "Roboto Condensed", sans-serif;
+}
+
 .main {
   min-height: 86vh;
 }
@@ -5,4 +10,10 @@
 .left {
   border-right: 1px solid black;
   box-shadow: 2px 0px 0px 2px green;
+}
+
+.left ul {
+  list-style: none;
+  font-size: 20px;
+  font-weight: bold;
 }
