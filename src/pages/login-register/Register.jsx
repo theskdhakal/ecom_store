@@ -5,9 +5,11 @@ import Form from "react-bootstrap/Form";
 import { CustomInput } from "../../components/custom-input/CustomInput";
 import { useDispatch } from "react-redux";
 import { registerUserAction } from "../../components/user/UserAction";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export const Register = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [form, setForm] = useState();
 
@@ -20,8 +22,8 @@ export const Register = () => {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(form);
-    await registerUserAction(form);
+    const isRegistered = await registerUserAction(form);
+    isRegistered && navigate("/");
   };
   const input = [
     {
