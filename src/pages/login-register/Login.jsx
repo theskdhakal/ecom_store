@@ -1,10 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { MainLayout } from "../../components/layout/main-layout/MainLayout";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { CustomInput } from "../../components/custom-input/CustomInput";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../components/user/UserAction";
 
 export const Login = () => {
+  const [form, setForm] = useState();
+  const dispatch = useDispatch();
+
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  };
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+
+    dispatch(loginUser(form));
+  };
   const input = [
     {
       label: "Email",
@@ -27,6 +46,7 @@ export const Login = () => {
         <Form
           style={{ width: "550px" }}
           className="border p-3 rounded m-3 shadow-lg m-5 p-5"
+          onSubmit={handleOnSubmit}
         >
           <Form.Text className="text-center ">
             <h2>Welcome Back !</h2>
@@ -34,7 +54,7 @@ export const Login = () => {
 
           <div className="mt-5">
             {input.map((item, i) => (
-              <CustomInput key={i} {...item} />
+              <CustomInput key={i} {...item} onChange={handleOnChange} />
             ))}
 
             <div className="d-grid">
