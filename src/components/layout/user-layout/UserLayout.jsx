@@ -10,7 +10,7 @@ export const UserLayout = ({ children }) => {
       <Header />
 
       <Row className="user-layout">
-        <Col xs={2} className="left ">
+        <Col md={2} className="left ">
           <h5 className="px-5">user title</h5>
           <hr />
           <ul className=" d-grid gap-3">
