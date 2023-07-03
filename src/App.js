@@ -13,8 +13,20 @@ import { Review } from "./pages/reviews/Review";
 import { Order } from "./pages/order/Order";
 import { ToastContainer } from "react-toastify";
 import { PrivateRoute } from "./components/private-route/PrivateRoute";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./components/firebase_config/Firebase";
+import { useDispatch } from "react-redux";
+import { getUserAction } from "./components/user/UserAction";
 
 function App() {
+  const dispatch = useDispatch();
+
+  onAuthStateChanged(auth, (userData) => {
+    if (userData?.uid) {
+      dispatch(getUserAction(userData.uid));
+    }
+  });
+
   return (
     <div>
       <Routes>
