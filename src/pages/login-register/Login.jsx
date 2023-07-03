@@ -1,14 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MainLayout } from "../../components/layout/main-layout/MainLayout";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { CustomInput } from "../../components/custom-input/CustomInput";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../components/user/UserAction";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const [form, setForm] = useState();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const { user } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    user?.uid && navigate("/");
+  }, [user?.uid]);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
