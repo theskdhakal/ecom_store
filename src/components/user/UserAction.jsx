@@ -8,15 +8,16 @@ import { doc, getDoc, setDoc } from "firebase/firestore";
 import { setUser } from "./UserSlice";
 
 export const registerUserAction = async ({
-  email,
   confirmPassword,
   password,
   ...rest
 }) => {
-  console.log(email);
   try {
-    const pendingUser = createUserWithEmailAndPassword(auth, email, password);
-    console.log(email);
+    const pendingUser = createUserWithEmailAndPassword(
+      auth,
+      rest.email,
+      password
+    );
 
     toast.promise(pendingUser, {
       pending: "please wait....",
@@ -25,7 +26,7 @@ export const registerUserAction = async ({
     const { user } = await pendingUser;
 
     if (user?.uid) {
-      await setDoc(doc(db, "users", user.uid), rest);
+      await setDoc(doc(db, "users", user.uid), { ...rest, role: "admin" });
       return toast.success("user has been registered successfully");
     }
     toast.error("something went wrong,please try again");
