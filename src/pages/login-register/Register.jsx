@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { MainLayout } from "../../components/layout/main-layout/MainLayout";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { CustomInput } from "../../components/custom-input/CustomInput";
 import { useDispatch } from "react-redux";
 import { registerUserAction } from "../../components/user/UserAction";
 import { Navigate, useNavigate } from "react-router-dom";
+import { UserLayout } from "../../components/layout/user-layout/UserLayout";
 
 export const Register = () => {
   const dispatch = useDispatch();
@@ -63,7 +63,7 @@ export const Register = () => {
     },
   ];
   return (
-    <MainLayout>
+    <UserLayout>
       <div className="d-flex justify-content-center align-item-center p-5 m-auto register">
         <Form
           style={{ width: "550px" }}
@@ -81,12 +81,12 @@ export const Register = () => {
 
             <div className="d-grid">
               <Button variant="primary" type="submit">
-                Submit
+                Register{" "}
               </Button>
             </div>
           </div>
         </Form>
       </div>
-    </MainLayout>
+    </UserLayout>
   );
 };
