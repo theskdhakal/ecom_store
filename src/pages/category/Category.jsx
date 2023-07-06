@@ -1,7 +1,8 @@
 import React from "react";
 import { UserLayout } from "../../components/layout/user-layout/UserLayout";
-import { Button, Col, Form, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { CustomInput } from "../../components/custom-input/CustomInput";
+import { CatTable } from "./CatTable";
 
 export const Category = () => {
   const categoryField = [
@@ -59,6 +60,10 @@ export const Category = () => {
           </Row>
         </Form>
       </div>
+
+      <Container className="shadow-lg p-2">
+        <CatTable />
+      </Container>
     </UserLayout>
   );
 };
