@@ -17,6 +17,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./components/firebase_config/Firebase";
 import { useDispatch } from "react-redux";
 import { getUserAction } from "./components/user/UserAction";
+import { NewProduct } from "./pages/product/NewProduct";
 
 function App() {
   const dispatch = useDispatch();
@@ -54,6 +55,14 @@ function App() {
           element={
             <PrivateRoute>
               <Product />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/product/new"
+          element={
+            <PrivateRoute>
+              <NewProduct />
             </PrivateRoute>
           }
         />

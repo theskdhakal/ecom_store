@@ -11,7 +11,7 @@ export const Product = () => {
 
       <hr />
       <div className="text-end mb-3">
-        <Link to="/">
+        <Link to="/product/new">
           <Button variant="primary">+Add New Product</Button>
         </Link>
       </div>
