@@ -4,8 +4,38 @@ import { UserLayout } from "../../components/layout/user-layout/UserLayout";
 import { Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import slugify from "slugify";
+import { getCategoriesAction } from "../category/CatAction";
 
 export const NewProduct = () => {
+  const dispatch = useDispatch();
+
+  const { category } = useSelector((state) => state.category);
+
+  useEffect(() => {
+    dispatch(getCategoriesAction());
+  }, [dispatch]);
+
+  const [form, setForm] = useState();
+
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+
+    setForm({ ...form, [name]: value });
+  };
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+
+    const slug = slugify(form.name, {
+      trim: true,
+      lower: true,
+    });
+    console.log(slug);
+  };
+
   const productFields = [
     {
       label: " Product Name",
@@ -70,20 +100,27 @@ export const NewProduct = () => {
       </Link>
       <div className="d-flex justify-content-center align-items-center">
         <Container className="shadow-lg m-5 p-5 ">
-          <Form>
+          <Form onSubmit={handleOnSubmit}>
             <Form.Group className="mt-5">
               <Form.Check
                 type="switch"
                 id="custom-switch"
                 label="Status"
                 name="status"
+                onChange={handleOnChange}
               />
 
               <Form.Group className="my-3">
                 <Form.Label>Select Category</Form.Label>
 
-                <Form.Select>
+                <Form.Select
+                  name="parentCat"
+                  required={true}
+                  onChange={handleOnChange}
+                >
                   <option value="">---Select One---</option>
+
+                  {category}
                 </Form.Select>
               </Form.Group>
             </Form.Group>
