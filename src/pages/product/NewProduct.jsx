@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import slugify from "slugify";
 import { getCategoriesAction } from "../category/CatAction";
+import { addNewProductAction } from "./ProductAction";
 
 export const NewProduct = () => {
   const dispatch = useDispatch();
@@ -29,11 +30,12 @@ export const NewProduct = () => {
   const handleOnSubmit = (e) => {
     e.preventDefault();
 
-    const slug = slugify(form.name, {
+    const slug = slugify(form.productName, {
       trim: true,
       lower: true,
     });
-    console.log(slug);
+
+    dispatch(addNewProductAction({ slug, ...form }));
   };
 
   const productFields = [
@@ -120,15 +122,23 @@ export const NewProduct = () => {
                 >
                   <option value="">---Select One---</option>
 
-                  {category}
+                  {category.map((item) => (
+                    <option key={item.slug} value={`${item.slug}`}>
+                      {item.name}
+                    </option>
+                  ))}
                 </Form.Select>
               </Form.Group>
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               {productFields.map((item, i) => (
-                <CustomInput key={i} {...item} />
+                <CustomInput key={i} {...item} onChange={handleOnChange} />
               ))}
             </Form.Group>
+
+            <div className="d-grid">
+              <Button type="submit">Submit New Product</Button>
+            </div>
           </Form>
         </Container>
       </div>
