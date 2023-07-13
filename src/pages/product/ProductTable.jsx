@@ -1,34 +1,38 @@
+import { useEffect } from "react";
 import Table from "react-bootstrap/Table";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllProductAction } from "./ProductAction";
 
 export const ProductTable = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllProductAction());
+  }, [dispatch]);
+
+  const { product } = useSelector((state) => state.product);
+  console.log(product);
   return (
     <Table striped bordered hover>
       <thead>
         <tr>
-          <th>#</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Username</th>
+          <th>Name </th>
+          <th>Original-price </th>
+          <th>Sales-Price</th>
+          <th>sales Start</th>
+          <th>sales End</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td colSpan={2}>Larry the Bird</td>
-          <td>@twitter</td>
-        </tr>
+        {product.map((item, i) => (
+          <tr key={i}>
+            <td>{item.productName}</td>
+            <td>{item.price}</td>
+            <td>{item.salesPrice}</td>
+            <td>{item.salesStart}</td>
+            <td>{item.salesEnd}</td>
+          </tr>
+        ))}
       </tbody>
     </Table>
   );
