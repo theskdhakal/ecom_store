@@ -1,35 +1,63 @@
 import Table from "react-bootstrap/Table";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategoriesAction } from "./CatAction";
+import { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
+import { setShowModal } from "../../components/modal/ModalSlice";
+import { CustomModal } from "../../components/modal/CustomModal";
+import { EditCatForm } from "./EditCatForm";
 
 export const CatTable = () => {
+  const dispatch = useDispatch();
+  const [selectedCat, setSelectedCat] = useState({});
+  const { category } = useSelector((state) => state.category);
+
+  useEffect(() => {
+    dispatch(getCategoriesAction());
+  }, [dispatch]);
+
+  const handleOnEdit = (item) => {
+    setSelectedCat(item);
+    dispatch(setShowModal(true));
+    console.log(selectedCat);
+  };
+
   return (
-    <Table striped bordered hover>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>First Name</th>
-          <th>Last Name</th>
-          <th>Username</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td colSpan={2}>Larry the Bird</td>
-          <td>@twitter</td>
-        </tr>
-      </tbody>
-    </Table>
+    <>
+      {selectedCat.slug && (
+        <CustomModal heading="update category">
+          <EditCatForm editCat={selectedCat} />
+        </CustomModal>
+      )}
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Category Name</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {category.map((item, i) => (
+            <tr key={item.slug}>
+              <td>{i + 1}</td>
+              <td>{item.name}</td>
+              <td>{item.status}</td>
+              <td>
+                <Button
+                  className="d-grid"
+                  onClick={() => {
+                    handleOnEdit(item);
+                  }}
+                >
+                  Edit
+                </Button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </>
   );
 };
