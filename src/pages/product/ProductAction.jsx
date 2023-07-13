@@ -1,7 +1,29 @@
-import { collection, doc, setDoc } from "firebase/firestore";
+import { collection, doc, getDocs, query, setDoc } from "firebase/firestore";
 import { toast } from "react-toastify";
 import { PRODUCTTABLE } from "../../components/assets/constants/Constant";
 import { db } from "../../components/firebase_config/Firebase";
+import { setProduct } from "./productSlice";
+
+export const getAllProductAction = () => async (dispatch) => {
+  try {
+    const q = query(collection(db, PRODUCTTABLE));
+
+    const productSnap = await getDocs(q);
+
+    const productList = [];
+
+    productSnap.forEach((doc) => {
+      const productDt = {
+        ...doc.data(),
+        slug: doc.id,
+      };
+      productList.push(productDt);
+    });
+    dispatch(setProduct(productList));
+  } catch (error) {
+    toast.error(error.message);
+  }
+};
 
 export const addNewProductAction =
   ({ slug, ...rest }) =>
@@ -16,8 +38,7 @@ export const addNewProductAction =
         success: "product has been added",
       });
       await promise;
-
-      alert("done");
+      dispatch(getAllProductAction());
     } catch (error) {
       toast.error(error.message);
     }
