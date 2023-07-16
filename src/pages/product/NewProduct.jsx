@@ -80,11 +80,12 @@ export const NewProduct = () => {
   };
 
   const handleOnImageChange = (e) => {
-    const { files } = e.target;
-    console.log(files);
+    const { name, files } = e.target;
+    console.log(name, files);
     console.log([...files]);
 
-    setImages([...files]);
+    setImages(files[0]);
+    console.log(files[0]);
   };
 
   const productFields = [
