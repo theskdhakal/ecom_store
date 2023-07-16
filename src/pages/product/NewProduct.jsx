@@ -1,7 +1,7 @@
 import Form from "react-bootstrap/Form";
 import { CustomInput } from "../../components/custom-input/CustomInput";
 import { UserLayout } from "../../components/layout/user-layout/UserLayout";
-import { Button, Container } from "react-bootstrap";
+import { Button, Container, ProgressBar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { IoIosArrowBack } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +9,11 @@ import { useEffect, useState } from "react";
 import slugify from "slugify";
 import { getCategoriesAction } from "../category/CatAction";
 import { addNewProductAction } from "./ProductAction";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { storage } from "../../components/firebase_config/Firebase";
+import { toast } from "react-toastify";
+
+const initialState = { status: "inactive", price: 0, productName: "" };
 
 export const NewProduct = () => {
   const dispatch = useDispatch();
@@ -16,13 +21,19 @@ export const NewProduct = () => {
   const { category } = useSelector((state) => state.category);
 
   useEffect(() => {
-    dispatch(getCategoriesAction());
+    !category.length && dispatch(getCategoriesAction());
   }, [dispatch]);
 
-  const [form, setForm] = useState();
+  const [form, setForm] = useState(initialState);
+  const [images, setImages] = useState();
+  const [progress, setProgress] = useState(0);
 
   const handleOnChange = (e) => {
-    const { name, value } = e.target;
+    let { name, value, checked } = e.target;
+
+    if (name === "status") {
+      value = checked ? "active" : "inactive";
+    }
 
     setForm({ ...form, [name]: value });
   };
@@ -35,7 +46,45 @@ export const NewProduct = () => {
       lower: true,
     });
 
-    dispatch(addNewProductAction({ slug, ...form }));
+    console.log(images);
+    // uploading the product image
+    if (images) {
+      // create file upload path
+
+      const storageRef = ref(
+        storage,
+        `/product/images/${Date.now()}-${images.name}`
+      );
+
+      //upload image to firebase
+      const uploadImage = uploadBytesResumable(storageRef, images);
+
+      uploadImage.on(
+        "state_changed",
+        (snapshot) => {
+          const percentage =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          setProgress(percentage);
+        },
+        (error) => {
+          toast.error(error.message);
+        },
+        () => {
+          getDownloadURL(uploadImage.snapshot.ref).then((url) => {
+            console.log(url);
+            dispatch(addNewProductAction({ slug, ...form, thumbnail: url }));
+          });
+        }
+      );
+    }
+  };
+
+  const handleOnImageChange = (e) => {
+    const { files } = e.target;
+    console.log(files);
+    console.log([...files]);
+
+    setImages([...files]);
   };
 
   const productFields = [
@@ -135,8 +184,17 @@ export const NewProduct = () => {
                 <CustomInput key={i} {...item} onChange={handleOnChange} />
               ))}
             </Form.Group>
+            <Form.Group className="mt-5">
+              <Form.Control
+                type="file"
+                name="image"
+                multiple
+                onChange={handleOnImageChange}
+              />
+            </Form.Group>
+            <ProgressBar striped variant="success" now={progress} />
 
-            <div className="d-grid">
+            <div className="d-grid mt-3">
               <Button type="submit">Submit New Product</Button>
             </div>
           </Form>
