@@ -26,6 +26,9 @@ export const ProductTable = () => {
       <tbody>
         {product.map((item, i) => (
           <tr key={i}>
+            <td>
+              <img src={item.thumbnail} width={"100px"} />
+            </td>
             <td>{item.productName}</td>
             <td>{item.price}</td>
             <td>{item.salesPrice}</td>
