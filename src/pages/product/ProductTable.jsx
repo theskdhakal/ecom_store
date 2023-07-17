@@ -16,6 +16,7 @@ export const ProductTable = () => {
     <Table striped bordered hover>
       <thead>
         <tr>
+          <th>Thumbnail </th>
           <th>Name </th>
           <th>Original-price </th>
           <th>Sales-Price</th>
@@ -27,7 +28,7 @@ export const ProductTable = () => {
         {product.map((item, i) => (
           <tr key={i}>
             <td>
-              <img src={item.thumbnail} width={"100px"} />
+              <img src={item.thumbnail} alt="" width={"100px"} />
             </td>
             <td>{item.productName}</td>
             <td>{item.price}</td>
