@@ -70,8 +70,6 @@ export const Payment = () => {
         }
       );
     }
-
-    dispatch(addNewPaymentAction({ ...form, slug }));
   };
 
   const handleOnImageChange = (e) => {
@@ -127,7 +125,7 @@ export const Payment = () => {
                   onChange={handleOnImageChange}
                 />
               </Form.Group>
-              <ProgressBar striped variant="success" />
+              <ProgressBar striped variant="success" now={progress} />
             </Col>
             <Col className="pt-5 ">
               <div className="d-grid ">
