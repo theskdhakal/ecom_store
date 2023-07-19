@@ -50,7 +50,7 @@ export const Category = () => {
           <Form.Text className="text-center ">
             <h2>Add new category !</h2>
           </Form.Text>
-          <Row className="d-flexjustify-content-between">
+          <Row className="d-flex justify-content-between">
             <Col className="pt-4">
               <Form.Group>
                 <label htmlFor="">Status</label>
