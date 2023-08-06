@@ -29,7 +29,11 @@ export const addNewProductAction =
   ({ slug, ...rest }) =>
   async (dispatch) => {
     try {
-      const promise = setDoc(doc(db, PRODUCTTABLE, slug), rest, {
+      const bookObj = {
+        ...rest,
+        addedDate: Date.now(),
+      };
+      const promise = setDoc(doc(db, PRODUCTTABLE, slug), bookObj, {
         merge: true,
       });
 

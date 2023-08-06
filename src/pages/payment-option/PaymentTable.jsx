@@ -1,9 +1,16 @@
+import { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import Table from "react-bootstrap/Table";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllPaymentAction } from "./paymentAction";
 
 export const PaymentTable = () => {
+  const dispatch = useDispatch();
   const { payment } = useSelector((state) => state.payment);
+
+  useEffect(() => {
+    dispatch(getAllPaymentAction());
+  }, [dispatch]);
   return (
     <Table striped bordered hover>
       <thead>
