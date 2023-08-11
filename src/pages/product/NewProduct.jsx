@@ -38,7 +38,7 @@ export const NewProduct = () => {
     setForm({ ...form, [name]: value });
   };
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
 
     const slug = slugify(form.productName, {
@@ -48,44 +48,96 @@ export const NewProduct = () => {
 
     console.log(images);
     // uploading the product image
-    if (images) {
-      // create file upload path
 
-      const storageRef = ref(
-        storage,
-        `/product/images/${Date.now()}-${images.name}`
-      );
+    // for single images, METHOD :1
+    // if (images) {
+    //   // create file upload path
 
-      //upload image to firebase
-      const uploadImage = uploadBytesResumable(storageRef, images);
+    //   const storageRef = ref(
+    //     storage,
+    //     `/product/images/${Date.now()}-${images.name}`
+    //   );
 
-      uploadImage.on(
-        "state_changed",
-        (snapshot) => {
-          const percentage =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          setProgress(percentage);
-        },
-        (error) => {
-          toast.error(error.message);
-        },
-        () => {
-          getDownloadURL(uploadImage.snapshot.ref).then((url) => {
-            console.log(url);
-            dispatch(addNewProductAction({ slug, ...form, thumbnail: url }));
-          });
-        }
+    //   //upload image to firebase
+    //   const uploadImage = uploadBytesResumable(storageRef, images);
+
+    //   uploadImage.on(
+    //     "state_changed",
+    //     (snapshot) => {
+    //       const percentage =
+    //         (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+    //       setProgress(percentage);
+    //     },
+    //     (error) => {
+    //       toast.error(error.message);
+    //     },
+    //     () => {
+    //       getDownloadURL(uploadImage.snapshot.ref).then((url) => {
+    //         console.log(url);
+    //         dispatch(addNewProductAction({ slug, ...form, thumbnail: url }));
+    //       });
+    //     }
+    //   );
+    // }
+
+    // *********************METHOD :2 ---------Multiple Image-------****************************
+    //loop through the images and execute upload code with in Promise and return the URl in promise array
+
+    if (images.length) {
+      const img = images.map((image) => {
+        return new Promise((resolve, reject) => {
+          //format the image name and path to upload
+
+          const storageRef = ref(
+            storage,
+            `/product/images/${Date.now()}-${images.name}`
+          );
+
+          //upload the image
+
+          const uploadImg = uploadBytesResumable(storageRef, image);
+
+          uploadImg.on(
+            "state_changed",
+            (snapshot) => {
+              const percentage =
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+
+              setProgress(percentage);
+            },
+            (error) => {
+              console.log(error);
+            },
+
+            async () => {
+              await getDownloadURL(uploadImg.snapshot.ref).then((url) => {
+                resolve(url);
+              });
+            }
+          );
+        });
+      });
+
+      const imgUrlList = await Promise.all(img);
+      dispatch(
+        addNewProductAction({
+          slug,
+          ...form,
+          imgUrlList,
+          thumbnail: imgUrlList[0],
+        })
       );
     }
   };
 
   const handleOnImageChange = (e) => {
     const { name, files } = e.target;
-    console.log(name, files);
-    console.log([...files]);
+    // console.log(name, files);
+    // console.log([...files]);
 
-    setImages(files[0]);
-    console.log(files[0]);
+    // setImages(files[0]);
+    // console.log(files[0]);
+    setImages([...files]);
   };
 
   const productFields = [
