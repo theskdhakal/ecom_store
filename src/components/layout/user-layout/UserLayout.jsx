@@ -45,6 +45,11 @@ export const UserLayout = ({ children }) => {
               </Link>
             </li>
             <li>
+              <Link className="nav-link" to="/message">
+                Message
+              </Link>
+            </li>
+            <li>
               <Link className="nav-link" to="/register">
                 Admin Registration
               </Link>
