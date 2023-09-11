@@ -193,6 +193,7 @@ export const NewProduct = () => {
       required: true,
     },
   ];
+
   return (
     <UserLayout>
       <h5 className="title">Add New Product</h5>

@@ -17,7 +17,7 @@ export const Order = () => {
               <th>order Date </th>
               <th>Email </th>
               <th>Items-Name</th>
-              <th>Items-Image </th>
+              <th>Order Status </th>
 
               <th>Action</th>
             </tr>
@@ -32,13 +32,7 @@ export const Order = () => {
                     <div key={index}>{product.name}</div>
                   ))}
                 </td>
-                <td>
-                  {item.cart.map((product, index) => (
-                    <div key={index}>
-                      <img src={product.image} alt="" width="80px" />
-                    </div>
-                  ))}
-                </td>
+                <td>Processing</td>
                 <td>
                   <Button
                     variant="warning"

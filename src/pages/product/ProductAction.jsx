@@ -1,8 +1,15 @@
-import { collection, doc, getDocs, query, setDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  setDoc,
+} from "firebase/firestore";
 import { toast } from "react-toastify";
 import { PRODUCTTABLE } from "../../components/assets/constants/Constant";
 import { db } from "../../components/firebase_config/Firebase";
-import { setProduct } from "./productSlice";
+import { setProduct, setSelectedProduct } from "./productSlice";
 
 export const getAllProductAction = () => async (dispatch) => {
   try {
@@ -47,3 +54,24 @@ export const addNewProductAction =
       toast.error(error.message);
     }
   };
+
+export const getSelectedProductsAction = (slug) => async (dispatch) => {
+  try {
+    if (!slug) {
+      return alert("Slug not available");
+    }
+    const q = doc(db, PRODUCTTABLE, slug);
+
+    const prodRef = await getDoc(q);
+
+    if (prodRef.exists()) {
+      const prod = prodRef.data();
+      // return { ...prod, id: slug };
+      dispatch(setSelectedProduct({ ...prod, id: slug }));
+    }
+
+    //   dispatch data to redux
+  } catch (error) {
+    console.log(error.message);
+  }
+};

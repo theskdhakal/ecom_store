@@ -1,0 +1,53 @@
+export const productFields = [
+  {
+    label: " Product Name",
+    name: "productName",
+    type: "text",
+    placeholder: "Cell Phone",
+    required: true,
+  },
+  {
+    label: " Price",
+    name: "price",
+    type: "number",
+    placeholder: "1000",
+    required: true,
+  },
+  {
+    label: " Quantity",
+    name: "quantity",
+    type: "number",
+    placeholder: "100",
+    required: true,
+  },
+  {
+    label: "Sales Price",
+    name: "salesPrice",
+    type: "text",
+    placeholder: "1100",
+    required: true,
+  },
+  {
+    label: " Sales Start",
+    name: "salesStart",
+    type: "date",
+    placeholder: "dd/mm/yyyy",
+    required: true,
+  },
+  {
+    label: " Sales End",
+    name: "salesEnd",
+    type: "date",
+    placeholder: "dd/mm/yyyy",
+    required: true,
+  },
+  {
+    label: " Description",
+    name: "description",
+    type: "text",
+    as: "textarea",
+    rows: "10",
+    placeholder: "Details about the product",
+    required: true,
+  },
+];

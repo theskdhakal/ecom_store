@@ -18,6 +18,7 @@ import { auth } from "./components/firebase_config/Firebase";
 import { useDispatch } from "react-redux";
 import { getUserAction } from "./components/user/UserAction";
 import { NewProduct } from "./pages/product/NewProduct";
+import EditProductForm from "./pages/product/EditProductForm";
 
 function App() {
   const dispatch = useDispatch();
@@ -63,6 +64,14 @@ function App() {
           element={
             <PrivateRoute>
               <NewProduct />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/product/:id"
+          element={
+            <PrivateRoute>
+              <EditProductForm />
             </PrivateRoute>
           }
         />
