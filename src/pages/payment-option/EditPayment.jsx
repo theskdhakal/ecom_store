@@ -2,15 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { CustomInput } from "../../components/custom-input/CustomInput";
 import { useDispatch } from "react-redux";
-import { addCategoryAction } from "./CatAction";
+import { addNewPaymentAction } from "./paymentAction";
 
-export const EditCatForm = ({ editCat }) => {
+export const EditPayment = ({ editPayment }) => {
   const dispatch = useDispatch();
   const [form, setForm] = useState({});
 
   useEffect(() => {
-    setForm(editCat);
-  }, [dispatch, editCat]);
+    setForm(editPayment);
+  }, [dispatch, EditPayment]);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -23,7 +23,7 @@ export const EditCatForm = ({ editCat }) => {
   const handleOnSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(addCategoryAction(form));
+    dispatch(addNewPaymentAction(form));
   };
 
   return (
@@ -67,11 +67,11 @@ export const EditCatForm = ({ editCat }) => {
               />
 
               <div className="d-grid mt-4">
-                <Button type="submit">Update Category</Button>
+                <Button type="submit">Update Payment-Option</Button>
               </div>
               <div className="d-grid mt-4">
                 <Button type="submit" variant="danger">
-                  Delete Category
+                  Delete Payment-Option
                 </Button>
               </div>
             </Col>
