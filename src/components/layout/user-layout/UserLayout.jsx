@@ -10,11 +10,12 @@ import { AiOutlineMenuFold } from "react-icons/ai";
 export const UserLayout = ({ children }) => {
   const { user } = useSelector((state) => state.user);
 
-  const [sidemenu, setSidemenu] = useState(false);
+  const [sidemenu, setSidemenu] = useState(true);
 
   const handleOnClick = () => {
     setSidemenu(!sidemenu);
   };
+
   return (
     <>
       <Header />
