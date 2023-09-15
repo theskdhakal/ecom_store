@@ -6,6 +6,7 @@ import { format } from "date-fns";
 import { setShowModal } from "../../components/modal/ModalSlice";
 import { CustomModal } from "../../components/modal/CustomModal";
 import { EditOrder } from "./EditOrder";
+import classnames from "classnames";
 
 export const Order = () => {
   const dispatch = useDispatch();
@@ -15,7 +16,22 @@ export const Order = () => {
 
   const handleOnEdit = (item) => {
     setSelectedOrder(item);
-    setShowModal(true);
+    dispatch(setShowModal(true));
+  };
+
+  const getOrderStatusClass = (orderStatus) => {
+    switch (orderStatus) {
+      case "pending":
+        return "bg-warning";
+      case "processing":
+        return "bg-primary";
+      case "shipped":
+        return "bg-info";
+      case "delivered":
+        return "bg-success";
+      case "cancelled":
+        return "bg-danger";
+    }
   };
   return (
     <UserLayout>
@@ -48,7 +64,16 @@ export const Order = () => {
                     <div key={index}>{product.name}</div>
                   ))}
                 </td>
-                <td>Processing</td>
+                <td>
+                  <span
+                    className={classnames(
+                      "text-black mb-1  rounded p-1 ",
+                      getOrderStatusClass(item.orderStatus)
+                    )}
+                  >
+                    {item.orderStatus}
+                  </span>
+                </td>
                 <td>
                   <Button
                     variant="warning"

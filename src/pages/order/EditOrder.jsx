@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { CustomInput } from "../../components/custom-input/CustomInput";
 import { useDispatch } from "react-redux";
-import { addNewPaymentAction } from "./paymentAction";
+import { updateOrderAction } from "./OrderAction";
+import { format } from "date-fns";
 
 export const EditOrder = ({ editOrder }) => {
   const dispatch = useDispatch();
@@ -10,7 +11,7 @@ export const EditOrder = ({ editOrder }) => {
 
   useEffect(() => {
     setForm(editOrder);
-  }, [dispatch, EditPayment]);
+  }, [dispatch, EditOrder]);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -38,35 +39,45 @@ export const EditOrder = ({ editOrder }) => {
             <Col className="pt-4">
               <Form.Group>
                 <label htmlFor="">Order-Status</label>
-                <Form.Select name="status" required onChange={handleOnChange}>
+                <Form.Select
+                  name="orderStatus"
+                  required
+                  onChange={handleOnChange}
+                >
                   <option value="">----Select----</option>
-                  <option value="pending" selected={form.status === "pending"}>
-                    <p className="bg-warning">pending</p>
+                  <option
+                    value="pending"
+                    selected={form.orderStatus === "pending"}
+                  >
+                    pending
                   </option>
-                  <option value="">----Select----</option>
+
                   <option
                     value="processing"
-                    selected={form.status === "processing"}
+                    selected={form.orderStatus === "processing"}
                   >
-                    <p className="bg-primary">processing</p>
+                    processing
                   </option>
-                  <option value="">----Select----</option>
-                  <option value="shipped" selected={form.status === "shipped"}>
-                    <p className="bg-info">shipped</p>
+
+                  <option
+                    value="shipped"
+                    selected={form.orderStatus === "shipped"}
+                  >
+                    shipped
                   </option>
-                  <option value="">----Select----</option>
+
                   <option
                     value="delivered"
-                    selected={form.status === "delivered"}
+                    selected={form.orderStatus === "delivered"}
                   >
-                    <p className="bg-success">delivered</p>
+                    delivered
                   </option>
-                  <option value="">----Select----</option>
+
                   <option
                     value="cancelled"
-                    selected={form.status === "cancelled"}
+                    selected={form.orderStatus === "cancelled"}
                   >
-                    <p className="bg-danger">cancelled</p>
+                    cancelled
                   </option>
                 </Form.Select>
               </Form.Group>
@@ -81,7 +92,11 @@ export const EditOrder = ({ editOrder }) => {
               <CustomInput
                 name="date"
                 required={true}
-                value={form.orderDate}
+                value={
+                  form.orderDate
+                    ? format(new Date(form.orderDate), "MM/dd/yyyy")
+                    : ""
+                }
                 onChange={handleOnChange}
                 disabled={true}
               />

@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { setUser } from "../../user/UserSlice";
 import { auth } from "../../firebase_config/Firebase";
+import logo from "../../assets/images/logo.JPG";
 
 export const Header = () => {
   const dispatch = useDispatch();
@@ -18,15 +19,17 @@ export const Header = () => {
   };
 
   return (
-    <Navbar expand="md" className="bg-primary" variant="dark">
+    <Navbar expand="md" className="header" variant="dark">
       <Container>
-        <Navbar.Brand href="/">E-com</Navbar.Brand>
+        <Navbar.Brand href="/">
+          <img src={logo} style={{ width: "115px" }} />
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
             {user?.uid ? (
               <>
-                <Link to="/dashboard" className="nav-link">
+                <Link to="/" className="nav-link">
                   Dashboard
                 </Link>
                 <Link to="/login" className="nav-link" onClick={handleOnLogout}>

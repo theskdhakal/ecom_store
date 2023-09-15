@@ -19,6 +19,7 @@ import { useDispatch } from "react-redux";
 import { getUserAction } from "./components/user/UserAction";
 import { NewProduct } from "./pages/product/NewProduct";
 import EditProductForm from "./pages/product/EditProductForm";
+import { Message } from "./pages/message/Message";
 
 function App() {
   const dispatch = useDispatch();
@@ -32,11 +33,10 @@ function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route
-          path="/dashboard"
+          path="/"
           element={
             <PrivateRoute>
               <Dashboard />
@@ -104,6 +104,14 @@ function App() {
           element={
             <PrivateRoute>
               <Review />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/message"
+          element={
+            <PrivateRoute>
+              <Message />
             </PrivateRoute>
           }
         />

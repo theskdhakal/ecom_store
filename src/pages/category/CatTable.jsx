@@ -46,7 +46,8 @@ export const CatTable = () => {
               <td>{item.status}</td>
               <td>
                 <Button
-                  className="d-grid "
+                  variant="warning"
+                  className="d-grid  "
                   onClick={() => {
                     handleOnEdit(item);
                   }}

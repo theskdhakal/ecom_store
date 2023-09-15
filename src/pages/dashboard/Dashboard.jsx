@@ -1,8 +1,14 @@
 import React, { useEffect } from "react";
 import { UserLayout } from "../../components/layout/user-layout/UserLayout";
 import { useDispatch } from "react-redux";
-import { getAllClientsAction } from "../../components/user/UserAction";
+import {
+  getAllClientsAction,
+  getUserAction,
+} from "../../components/user/UserAction";
 import { getAllOrderAction } from "../order/OrderAction";
+import { getAllReviewAction } from "../reviews/ReviewAction";
+import { getAllMessageAction } from "../message/MessageAction";
+import { Chart } from "../../components/chart/Chart";
 
 export const Dashboard = () => {
   const dispatch = useDispatch();
@@ -10,10 +16,12 @@ export const Dashboard = () => {
   useEffect(() => {
     dispatch(getAllClientsAction());
     dispatch(getAllOrderAction());
+    dispatch(getAllReviewAction());
+    dispatch(getAllMessageAction());
   }, [dispatch]);
   return (
     <UserLayout>
-      <div>Dashboard</div>
+      <div>{/* <Chart /> */}</div>
     </UserLayout>
   );
 };

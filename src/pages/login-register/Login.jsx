@@ -6,6 +6,7 @@ import { CustomInput } from "../../components/custom-input/CustomInput";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../components/user/UserAction";
 import { useNavigate } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 
 export const Login = () => {
   const [form, setForm] = useState();
@@ -16,7 +17,7 @@ export const Login = () => {
 
   useEffect(() => {
     user?.uid && navigate("/");
-  }, [user?.uid]);
+  }, [user?.uid, navigate]);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -48,9 +49,15 @@ export const Login = () => {
       required: true,
     },
   ];
+
+  const isMobile = useMediaQuery({ maxWidth: 450 });
   return (
     <MainLayout>
-      <div className="d-flex justify-content-center align-item-center p-5 m-auto register">
+      <div
+        className={`d-flex justify-content-center align-item-center ${
+          isMobile ? "p-1" : "p-5"
+        }m-auto register`}
+      >
         <Form
           style={{ width: "550px" }}
           className="border p-3 rounded m-3 shadow-lg m-5 p-5"

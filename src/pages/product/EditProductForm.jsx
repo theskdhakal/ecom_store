@@ -8,7 +8,7 @@ import {
   getSelectedProductsAction,
 } from "./ProductAction";
 import { MainLayout } from "../../components/layout/main-layout/MainLayout";
-import { Button, Container, Form } from "react-bootstrap";
+import { Button, Container, Form, ProgressBar } from "react-bootstrap";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db, storage } from "../../components/firebase_config/Firebase";
 import { PRODUCTTABLE } from "../../components/assets/constants/Constant";
@@ -286,6 +286,8 @@ const EditProductForm = () => {
                 onChange={handleOnImageChange}
               />
             </Form.Group>
+
+            <ProgressBar striped variant="success" now={progress} />
 
             <div className="d-grid py-3">
               <Button type="submit" variant="primary">
