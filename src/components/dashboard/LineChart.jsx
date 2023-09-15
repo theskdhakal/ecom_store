@@ -25,7 +25,7 @@ export const LineChart = () => {
     labels: orderDates.map((date) => date.toLocaleDateString()), // x-axis
     datasets: [
       {
-        label: " Sales Overview",
+        label: " Sales Amount",
         data: orderAmount, //y-axis
         borderColor: "green",
         backgroundColor: "rgba(024,206,145,0.8)", // fill color
@@ -34,5 +34,10 @@ export const LineChart = () => {
     ],
   };
 
-  return <Line data={LineData} />;
+  return (
+    <div>
+      <h2>Sales Overview</h2>
+      <Line data={LineData} />
+    </div>
+  );
 };

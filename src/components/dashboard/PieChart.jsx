@@ -1,5 +1,4 @@
 import React from "react";
-import { chartJS as chart } from "chart.js/auto";
 
 import { useSelector } from "react-redux";
 import { Pie } from "react-chartjs-2";
@@ -25,7 +24,7 @@ export const PieChart = () => {
 
   const pieData = {
     labels: statusLabels,
-    dataSets: [
+    datasets: [
       {
         data: statusCounts,
         backgroundColor: [

@@ -7,6 +7,7 @@ import { setShowModal } from "../../components/modal/ModalSlice";
 import { CustomModal } from "../../components/modal/CustomModal";
 import { EditOrder } from "./EditOrder";
 import classnames from "classnames";
+import { getOrderStatusClass } from "../../components/assets/constants/Constant";
 
 export const Order = () => {
   const dispatch = useDispatch();
@@ -19,20 +20,6 @@ export const Order = () => {
     dispatch(setShowModal(true));
   };
 
-  const getOrderStatusClass = (orderStatus) => {
-    switch (orderStatus) {
-      case "pending":
-        return "bg-warning";
-      case "processing":
-        return "bg-primary";
-      case "shipped":
-        return "bg-info";
-      case "delivered":
-        return "bg-success";
-      case "cancelled":
-        return "bg-danger";
-    }
-  };
   return (
     <UserLayout>
       {selectedOrder.id && (
@@ -40,7 +27,7 @@ export const Order = () => {
           <EditOrder editOrder={selectedOrder} />
         </CustomModal>
       )}
-      <Container className="mt-5 shadow-lg p-5">
+      <div className="mt-5 shadow p-2  ">
         <h4 className="text-center"> Orders</h4>
         <hr />
         <Table striped bordered hover className="mt-5 ">
@@ -65,14 +52,14 @@ export const Order = () => {
                   ))}
                 </td>
                 <td>
-                  <span
+                  <div
                     className={classnames(
-                      "text-black mb-1  rounded p-1 ",
+                      "text-white text-center mb-1  rounded p-1 ",
                       getOrderStatusClass(item.orderStatus)
                     )}
                   >
                     {item.orderStatus}
-                  </span>
+                  </div>
                 </td>
                 <td>
                   <Button
@@ -89,7 +76,7 @@ export const Order = () => {
             ))}
           </tbody>
         </Table>
-      </Container>
+      </div>
     </UserLayout>
   );
 };

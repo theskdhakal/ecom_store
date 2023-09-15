@@ -37,9 +37,9 @@ export const ProductTable = () => {
               <img src={item.thumbnail} alt="" width={"100px"} />
             </td>
             <td>{item.status}</td>
-            <td>{item.name}</td>
+            <td>{item.productName}</td>
             <td>{item.price}</td>
-            <td>{item.qty}</td>
+            <td>{item.quantity}</td>
             <td>{item.salesPrice}</td>
             <td>{item.salesStart}</td>
             <td>{item.salesEnd}</td>
