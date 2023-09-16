@@ -21,11 +21,28 @@
   list-style: none;
   font-size: 20px;
   font-weight: bold;
-  min-height: 60vh;
+
+  @media (max-width: 450px) {
+    min-height: 60vh;
+  }
 }
 
 .title {
   font-weight: bold;
   text-align: center;
   margin-top: 2rem;
+}
+
+.mobile-form {
+  width: 100% !important;
+}
+
+.login-container {
+  background-image: url(./components/assets/images/login.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh; /* Adjust this to control the minimum height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

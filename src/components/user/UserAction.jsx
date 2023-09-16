@@ -13,7 +13,7 @@ import {
   query,
   setDoc,
 } from "firebase/firestore";
-import { setClient, setUser } from "./UserSlice";
+import { setClient, setUser, setAdmin } from "./UserSlice";
 import { CLIENT } from "../assets/constants/Constant";
 
 export const registerUserAction = async ({
@@ -78,6 +78,37 @@ export const loginUser = (form) => async (dispatch) => {
     }
   } catch (error) {
     toast.error(error.message);
+  }
+};
+
+export const getAllAdminAction = () => async (dispatch) => {
+  try {
+    //define search query
+
+    const q = query(collection(db, "users"));
+
+    // run query
+    let admin = [];
+
+    const querySnapShot = await getDocs(q);
+
+    querySnapShot.forEach((doc) => {
+      admin.push({ ...doc.data(), id: doc.id });
+    });
+    dispatch(setAdmin(admin));
+  } catch (error) {
+    toast.error("Couldn't load admin now, please try again");
+  }
+};
+
+export const deleteAdminAction = (id) => async (dispatch) => {
+  try {
+    await deleteDoc(doc(db, "users", id));
+
+    toast.success("admin has been deleted successfully");
+    dispatch(getAllAdminAction());
+  } catch (error) {
+    toast.error("something went wrong while deleting client");
   }
 };
 

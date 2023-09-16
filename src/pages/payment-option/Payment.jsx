@@ -10,6 +10,7 @@ import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { toast } from "react-toastify";
 import slugify from "slugify";
 import { addNewPaymentAction } from "./paymentAction";
+import { useMediaQuery } from "react-responsive";
 
 export const Payment = () => {
   const dispatch = useDispatch();
@@ -85,6 +86,8 @@ export const Payment = () => {
       required: true,
     },
   ];
+
+  const isMobile = useMediaQuery({ maxWidth: 450 });
   return (
     <UserLayout>
       <h5 className="title mt-4">Payment</h5>
@@ -127,18 +130,29 @@ export const Payment = () => {
               </Form.Group>
               <ProgressBar striped variant="success" now={progress} />
             </Col>
-            <Col className="pt-5 ">
-              <div className="d-grid ">
-                <Button variant="primary" type="submit">
-                  Add New Payment!
-                </Button>
-              </div>
-            </Col>
+
+            {isMobile ? (
+              <Row className="pt-5 ">
+                <div className="d-grid ">
+                  <Button variant="primary" type="submit">
+                    Add New Payment!
+                  </Button>
+                </div>
+              </Row>
+            ) : (
+              <Col className="pt-5 ">
+                <div className="d-grid ">
+                  <Button variant="primary" type="submit">
+                    Add New Payment!
+                  </Button>
+                </div>
+              </Col>
+            )}
           </Row>
         </Form>
       </div>
 
-      <Container className="mt-5 p-5 shadow-lg">
+      <Container className="mt-5 p-3 mb-5  shadow-lg">
         <PaymentTable />
       </Container>
     </UserLayout>

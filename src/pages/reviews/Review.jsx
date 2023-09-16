@@ -19,46 +19,48 @@ export const Review = () => {
 
   return (
     <UserLayout>
-      <Container className="mt-5 shadow-lg p-5">
+      <Container className="mt-5 shadow-lg p-2">
         <h4 className="text-center"> Reviews</h4>
         <hr />
-        <Table striped bordered hover className="mt-5 ">
-          <thead>
-            <tr>
-              <th>S.N </th>
-              <th>Client Name</th>
-              <th>Product Name</th>
-              <th>Rating</th>
-              <th>Feedback </th>
+        <div style={{ overflowX: "auto" }}>
+          <Table striped bordered hover className="mt-5 ">
+            <thead>
+              <tr>
+                <th>S.N </th>
+                <th>Client Name</th>
+                <th>Product Name</th>
+                <th>Rating</th>
+                <th>Feedback </th>
 
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {review.map((item, i) => (
-              <tr key={i}>
-                <td>{i + 1}</td>
-                <td>{item.clientName}</td>
-                <td>{item.prodName}</td>
-                <td>
-                  <Rating rate={item.rating} />
-                </td>
-                <td>{item.feedback}</td>
-                <td>
-                  <Button
-                    variant="danger"
-                    className="d-grid "
-                    onClick={() => {
-                      handleOnDelete(item.id);
-                    }}
-                  >
-                    Delete
-                  </Button>
-                </td>
+                <th>Action</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
+            </thead>
+            <tbody>
+              {review.map((item, i) => (
+                <tr key={i}>
+                  <td>{i + 1}</td>
+                  <td>{item.clientName}</td>
+                  <td>{item.prodName}</td>
+                  <td>
+                    <Rating rate={item.rating} />
+                  </td>
+                  <td>{item.feedback}</td>
+                  <td>
+                    <Button
+                      variant="danger"
+                      className="d-grid "
+                      onClick={() => {
+                        handleOnDelete(item.id);
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </div>
       </Container>
     </UserLayout>
   );

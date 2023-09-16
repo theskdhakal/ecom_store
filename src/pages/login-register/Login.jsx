@@ -33,6 +33,7 @@ export const Login = () => {
 
     dispatch(loginUser(form));
   };
+
   const input = [
     {
       label: "Email",
@@ -51,32 +52,30 @@ export const Login = () => {
   ];
 
   const isMobile = useMediaQuery({ maxWidth: 450 });
+
   return (
     <MainLayout>
-      <div
-        className={`d-flex justify-content-center align-item-center ${
-          isMobile ? "p-1" : "p-5"
-        }m-auto register`}
-      >
+      <div className="login-container">
         <Form
-          style={{ width: "550px" }}
-          className="border p-3 rounded m-3 shadow-lg m-5 p-5"
+          style={{
+            width: isMobile ? "86vw" : "555px",
+            background: "white",
+          }}
+          className="border rounded m-3 shadow-lg p-5"
           onSubmit={handleOnSubmit}
         >
           <Form.Text className="text-center ">
-            <h2>Welcome Back !</h2>
+            <h2 className="mb-5">Welcome Back!</h2>
           </Form.Text>
 
-          <div className="mt-5">
-            {input.map((item, i) => (
-              <CustomInput key={i} {...item} onChange={handleOnChange} />
-            ))}
+          {input.map((item, i) => (
+            <CustomInput key={i} {...item} onChange={handleOnChange} />
+          ))}
 
-            <div className="d-grid">
-              <Button variant="primary" type="submit">
-                Login
-              </Button>
-            </div>
+          <div className="d-grid mt-2">
+            <Button variant="primary" type="submit">
+              Login
+            </Button>
           </div>
         </Form>
       </div>

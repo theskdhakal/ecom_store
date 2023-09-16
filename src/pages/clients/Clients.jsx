@@ -17,43 +17,46 @@ export const Clients = () => {
 
   return (
     <UserLayout>
-      <Container className="mt-5 shadow-lg p-5">
+      <div className="mt-5 p-1 shadow ">
         <h4 className="text-center"> Clients</h4>
         <hr />
-        <Table striped bordered hover className="mt-5 ">
-          <thead>
-            <tr>
-              <th>S.N </th>
-              <th>First Name </th>
-              <th>Last Name </th>
-              <th>Email </th>
 
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {client.map((item, i) => (
-              <tr key={i}>
-                <td>{i + 1}</td>
-                <td>{item.fName}</td>
-                <td>{item.lName}</td>
-                <td>{item.email}</td>
-                <td>
-                  <Button
-                    variant="danger"
-                    className="d-grid "
-                    onClick={() => {
-                      handleOnDelete(item.id);
-                    }}
-                  >
-                    Delete
-                  </Button>
-                </td>
+        <div style={{ overflowX: "auto" }}>
+          <Table striped hover className="mt-5 ">
+            <thead>
+              <tr>
+                <th>S.N </th>
+                <th>First Name </th>
+                <th>Last Name </th>
+                <th>Email </th>
+
+                <th>Action</th>
               </tr>
-            ))}
-          </tbody>
-        </Table>
-      </Container>
+            </thead>
+            <tbody>
+              {client.map((item, i) => (
+                <tr key={i}>
+                  <td>{i + 1}</td>
+                  <td>{item.fName}</td>
+                  <td>{item.lName}</td>
+                  <td>{item.email}</td>
+                  <td>
+                    <Button
+                      variant="danger"
+                      className="d-grid "
+                      onClick={() => {
+                        handleOnDelete(item.id);
+                      }}
+                    >
+                      Delete
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </div>
+      </div>
     </UserLayout>
   );
 };

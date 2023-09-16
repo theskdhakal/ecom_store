@@ -74,7 +74,7 @@ export const UserLayout = ({ children }) => {
                   </li>
                   <li>
                     <Link className="nav-link" to="/register">
-                      Admin Registration
+                      Admin
                     </Link>
                   </li>
                 </ul>
@@ -149,7 +149,7 @@ export const UserLayout = ({ children }) => {
                 </li>
                 <li>
                   <Link className="nav-link" to="/register">
-                    Admin Registration
+                    Admin
                   </Link>
                 </li>
               </ul>

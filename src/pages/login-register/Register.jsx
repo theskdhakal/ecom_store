@@ -6,6 +6,8 @@ import { useDispatch } from "react-redux";
 import { registerUserAction } from "../../components/user/UserAction";
 import { Navigate, useNavigate } from "react-router-dom";
 import { UserLayout } from "../../components/layout/user-layout/UserLayout";
+import { useMediaQuery } from "react-responsive";
+import { Admin } from "../../components/admin/AdminTable";
 
 export const Register = () => {
   const dispatch = useDispatch();
@@ -62,15 +64,19 @@ export const Register = () => {
       required: true,
     },
   ];
+
+  const isMobile = useMediaQuery({ maxWidth: 450 });
+
   return (
     <UserLayout>
-      <div className="d-flex justify-content-center align-item-center p-5 m-auto register">
+      <div className="d-flex justify-content-center align-items-center p-1 m-auto">
         <Form
-          style={{ width: "550px" }}
-          className="border p-3 rounded m-3 shadow-lg m-5 p-5"
+          className={`border p-3 rounded m-3 shadow-lg  p-5 ${
+            isMobile ? "w-100 mobile-form" : "w-50 m-5 "
+          }`}
           onSubmit={handleOnSubmit}
         >
-          <Form.Text className="text-center ">
+          <Form.Text className="text-center">
             <h2>Please register Admin</h2>
           </Form.Text>
 
@@ -81,11 +87,15 @@ export const Register = () => {
 
             <div className="d-grid">
               <Button variant="primary" type="submit">
-                Register{" "}
+                Register
               </Button>
             </div>
           </div>
         </Form>
+      </div>
+
+      <div className="my-5 shadow">
+        <Admin />
       </div>
     </UserLayout>
   );

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { UserLayout } from "../../components/layout/user-layout/UserLayout";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllClientsAction } from "../../components/user/UserAction";
+import {
+  getAllAdminAction,
+  getAllClientsAction,
+} from "../../components/user/UserAction";
 import { getAllOrderAction } from "../order/OrderAction";
 import { getAllReviewAction } from "../reviews/ReviewAction";
 import { getAllMessageAction } from "../message/MessageAction";
@@ -30,6 +33,7 @@ export const Dashboard = () => {
     dispatch(getAllOrderAction());
     dispatch(getAllReviewAction());
     dispatch(getAllMessageAction());
+    dispatch(getAllAdminAction());
   }, [dispatch]);
   return (
     <UserLayout>
@@ -104,11 +108,12 @@ export const Dashboard = () => {
         </Col>
       </Row>
 
-      <Row className="shadow my-5">
-        <Col md={8}>
+      <Row className=" my-5">
+        <Col md={7} className="shadow">
           <BarChart />
         </Col>
-        <Col md={4}>
+        <Col md={1}></Col>
+        <Col md={4} className="shadow">
           <DoughnutChart />
         </Col>
       </Row>
