@@ -72,7 +72,9 @@ export const UserLayout = ({ children }) => {
           </Col>
         )}
 
-        <Col md={sidemenu ? 10 : 12} className="right">
+        <Col md={1}></Col>
+
+        <Col md={sidemenu ? 8 : 10} className="right">
           <Button
             onClick={handleOnClick}
             style={{ background: "#374151" }}
@@ -82,6 +84,8 @@ export const UserLayout = ({ children }) => {
           </Button>
           <div className="main">{children}</div>
         </Col>
+
+        <Col md={1}></Col>
       </Row>
 
       <Footer />
