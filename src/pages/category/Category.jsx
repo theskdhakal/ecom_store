@@ -6,6 +6,7 @@ import { CatTable } from "./CatTable";
 import { useDispatch } from "react-redux";
 import slugify from "slugify";
 import { addCategoryAction } from "./CatAction";
+import { useMediaQuery } from "react-responsive";
 
 export const Category = () => {
   const dispatch = useDispatch();
@@ -37,6 +38,8 @@ export const Category = () => {
       required: true,
     },
   ];
+
+  const isMobile = useMediaQuery({ maxWidth: 450 });
   return (
     <UserLayout>
       <h5 className="title">Category</h5>
@@ -69,13 +72,24 @@ export const Category = () => {
                 ))}
               </div>
             </Col>
-            <Col className="pt-5" xs={2}>
-              <div className="d-grid">
-                <Button variant="primary" type="submit">
-                  +Add{" "}
-                </Button>
-              </div>
-            </Col>
+
+            {isMobile ? (
+              <Row className="pt-5" xs={2}>
+                <div className="d-grid">
+                  <Button variant="primary" type="submit">
+                    +Add{" "}
+                  </Button>
+                </div>
+              </Row>
+            ) : (
+              <Col className="pt-5" xs={2}>
+                <div className="d-grid">
+                  <Button variant="primary" type="submit">
+                    +Add{" "}
+                  </Button>
+                </div>
+              </Col>
+            )}
           </Row>
         </Form>
       </div>

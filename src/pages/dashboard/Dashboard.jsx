@@ -38,13 +38,13 @@ export const Dashboard = () => {
       </div>
 
       <Row>
-        <Col md={4} className=" p-2">
-          <DoughnutChart />
+        <Col md={9} className=" p-2">
+          <LineChart />
         </Col>
 
-        <Col md={4}></Col>
+        <Col md={1}></Col>
 
-        <Col md={4}>
+        <Col md={2}>
           <Row className="mt-5">
             <div
               className="shadow-lg d-flex rounded justify-content-between p-5 text-white  text-center "
@@ -98,9 +98,9 @@ export const Dashboard = () => {
         </Col>
       </Row>
 
-      <Row className="shadow-lg mt-5 p-3">
+      <Row className="shadow-lg text-center d-flex justify-content-center mt-5 p-3">
         <Col md={6}>
-          <LineChart />
+          <PieChart />
         </Col>
       </Row>
 
@@ -109,7 +109,7 @@ export const Dashboard = () => {
           <BarChart />
         </Col>
         <Col md={4}>
-          <PieChart />
+          <DoughnutChart />
         </Col>
       </Row>
     </UserLayout>
