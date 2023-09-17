@@ -7,6 +7,14 @@ import { useSelector } from "react-redux";
 import { AiOutlineMenuUnfold } from "react-icons/ai";
 import { AiOutlineMenuFold } from "react-icons/ai";
 import { useMediaQuery } from "react-responsive";
+import { BiCategoryAlt } from "react-icons/bi";
+import { BsFillBoxFill } from "react-icons/bs";
+import { MdPayments } from "react-icons/md";
+import { BsPeopleFill } from "react-icons/bs";
+import { BsCartCheckFill } from "react-icons/bs";
+import { GoCodeReview } from "react-icons/go";
+import { AiFillMessage } from "react-icons/ai";
+import { RiAdminFill } from "react-icons/ri";
 
 export const UserLayout = ({ children }) => {
   const { user } = useSelector((state) => state.user);
@@ -39,42 +47,46 @@ export const UserLayout = ({ children }) => {
                 <ul className={`d-grid gap-3`}>
                   <li>
                     <Link to="/category" className="nav-link">
+                      <BiCategoryAlt />
                       Category
                     </Link>
                   </li>
                   <li>
                     <Link className="nav-link" to="/product">
-                      Product
+                      <BsFillBoxFill /> Product
                     </Link>
                   </li>
                   <li>
                     <Link className="nav-link" to="/payment">
+                      <MdPayments />
                       Payment
                     </Link>
                   </li>
                   <li>
                     <Link className="nav-link" to="/client">
+                      <BsPeopleFill />
                       Client
                     </Link>
                   </li>
                   <li>
                     <Link className="nav-link" to="/order">
+                      <BsCartCheckFill />
                       Order
                     </Link>
                   </li>
                   <li>
                     <Link className="nav-link" to="/review">
-                      Review
+                      <GoCodeReview /> Review
                     </Link>
                   </li>
                   <li>
                     <Link className="nav-link" to="/message">
-                      Message
+                      <AiFillMessage /> Message
                     </Link>
                   </li>
                   <li>
                     <Link className="nav-link" to="/register">
-                      Admin
+                      <RiAdminFill /> Admin
                     </Link>
                   </li>
                 </ul>
@@ -114,42 +126,46 @@ export const UserLayout = ({ children }) => {
               <ul className={`d-grid gap-3`}>
                 <li>
                   <Link to="/category" className="nav-link">
+                    <BiCategoryAlt />
                     Category
                   </Link>
                 </li>
                 <li>
                   <Link className="nav-link" to="/product">
+                    <BsFillBoxFill />
                     Product
                   </Link>
                 </li>
                 <li>
                   <Link className="nav-link" to="/payment">
+                    <MdPayments />
                     Payment
                   </Link>
                 </li>
                 <li>
                   <Link className="nav-link" to="/client">
-                    Client
+                    <BsPeopleFill /> Client
                   </Link>
                 </li>
                 <li>
                   <Link className="nav-link" to="/order">
+                    <BsCartCheckFill />
                     Order
                   </Link>
                 </li>
                 <li>
                   <Link className="nav-link" to="/review">
-                    Review
+                    <GoCodeReview /> Review
                   </Link>
                 </li>
                 <li>
                   <Link className="nav-link" to="/message">
-                    Message
+                    <AiFillMessage /> Message
                   </Link>
                 </li>
                 <li>
                   <Link className="nav-link" to="/register">
-                    Admin
+                    <RiAdminFill /> Admin
                   </Link>
                 </li>
               </ul>
