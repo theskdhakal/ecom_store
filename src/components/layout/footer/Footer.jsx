@@ -1,5 +1,6 @@
 import React from "react";
 import logo from "../../assets/images/logo.JPG";
+import { Link } from "react-router-dom";
 
 export const Footer = () => {
   return (
@@ -9,6 +10,15 @@ export const Footer = () => {
     >
       <div className="mb-4">
         <img src={logo} style={{ width: "115px" }} />
+      </div>
+
+      <div>
+        <Link
+          to="https://gadget-store-theskdhakal.vercel.app/"
+          className="text-white text-decoration-none"
+        >
+          Redirect to Store
+        </Link>
       </div>
 
       <div>All Rights Reserved | GadgetVerse</div>
