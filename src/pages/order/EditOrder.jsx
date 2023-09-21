@@ -4,6 +4,7 @@ import { CustomInput } from "../../components/custom-input/CustomInput";
 import { useDispatch } from "react-redux";
 import { updateOrderAction } from "./OrderAction";
 import { format } from "date-fns";
+import { toast } from "react-toastify";
 
 export const EditOrder = ({ editOrder }) => {
   const dispatch = useDispatch();
@@ -24,7 +25,9 @@ export const EditOrder = ({ editOrder }) => {
   const handleOnSubmit = (e) => {
     e.preventDefault();
 
-    dispatch(updateOrderAction(form));
+    toast.info("button has been disabled because of security reason");
+
+    // dispatch(updateOrderAction(form));
   };
 
   return (

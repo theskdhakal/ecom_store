@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { getAllProductAction } from "./ProductAction";
 import { useMediaQuery } from "react-responsive";
 import { ProductCard } from "../../components/assets/card/ProductCard";
+import { toast } from "react-toastify";
 
 export const ProductTable = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,10 @@ export const ProductTable = () => {
   }, []);
 
   const isMobile = useMediaQuery({ maxWidth: 450 });
+
+  const handleOnClick = () => {
+    toast.info("button has been disabled because of security purpose");
+  };
   return (
     <>
       {isMobile ? (
@@ -56,9 +61,11 @@ export const ProductTable = () => {
                 <td>{item.salesStart}</td>
                 <td>{item.salesEnd}</td>
                 <td>
-                  <Link to={`/product/${item.slug}`}>
-                    <Button variant="warning">Edit</Button>
-                  </Link>
+                  {/* <Link to={`/product/${item.slug}`}> */}
+                  <Button variant="warning" onClick={handleOnClick}>
+                    Edit
+                  </Button>
+                  {/* </Link> */}
                 </td>
               </tr>
             ))}

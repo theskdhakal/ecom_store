@@ -47,6 +47,7 @@ export const Clients = () => {
                       onClick={() => {
                         handleOnDelete(item.id);
                       }}
+                      disabled
                     >
                       Delete
                     </Button>

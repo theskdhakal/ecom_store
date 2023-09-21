@@ -3,6 +3,7 @@ import { UserLayout } from "../../components/layout/user-layout/UserLayout";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Container, Table } from "react-bootstrap";
 import { deleteAdminAction } from "../user/UserAction";
+import { toast } from "react-toastify";
 
 export const Admin = () => {
   const { admin } = useSelector((state) => state.user);
@@ -10,7 +11,9 @@ export const Admin = () => {
 
   const handleOnDelete = (id) => {
     if (window.confirm("Are you sure you want to delete this client?")) {
-      dispatch(deleteAdminAction(id));
+      toast.info("button has been disabled because of security purpose");
+
+      // dispatch(deleteAdminAction(id));
     }
   };
 
@@ -43,7 +46,7 @@ export const Admin = () => {
                     variant="danger"
                     className="d-grid "
                     onClick={() => {
-                      // handleOnDelete(item.id);
+                      handleOnDelete(item.id);
                     }}
                   >
                     Delete

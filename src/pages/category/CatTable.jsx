@@ -6,6 +6,7 @@ import { Button } from "react-bootstrap";
 import { setShowModal } from "../../components/modal/ModalSlice";
 import { CustomModal } from "../../components/modal/CustomModal";
 import { EditCatForm } from "./EditCatForm";
+import { toast } from "react-toastify";
 
 export const CatTable = () => {
   const dispatch = useDispatch();
@@ -17,8 +18,10 @@ export const CatTable = () => {
   }, [dispatch]);
 
   const handleOnEdit = (item) => {
-    setSelectedCat(item);
-    dispatch(setShowModal(true));
+    toast.info("button has been disable because of security purpose");
+
+    // setSelectedCat(item);
+    // dispatch(setShowModal(true));
     console.log(selectedCat);
   };
 

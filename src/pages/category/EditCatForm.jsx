@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Col, Container, Form, Row, Toast } from "react-bootstrap";
 import { CustomInput } from "../../components/custom-input/CustomInput";
 import { useDispatch } from "react-redux";
 import { addCategoryAction } from "./CatAction";
@@ -22,7 +22,6 @@ export const EditCatForm = ({ editCat }) => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-
     dispatch(addCategoryAction(form));
   };
 

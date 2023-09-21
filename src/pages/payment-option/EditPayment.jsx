@@ -3,6 +3,7 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { CustomInput } from "../../components/custom-input/CustomInput";
 import { useDispatch } from "react-redux";
 import { addNewPaymentAction } from "./paymentAction";
+import { toast } from "react-toastify";
 
 export const EditPayment = ({ editPayment }) => {
   const dispatch = useDispatch();
@@ -22,8 +23,9 @@ export const EditPayment = ({ editPayment }) => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
+    toast.info("button has been disabled because of security purpose");
 
-    dispatch(addNewPaymentAction(form));
+    // dispatch(addNewPaymentAction(form));
   };
 
   return (

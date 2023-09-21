@@ -52,6 +52,7 @@ export const Review = () => {
                       onClick={() => {
                         handleOnDelete(item.id);
                       }}
+                      disabled
                     >
                       Delete
                     </Button>
