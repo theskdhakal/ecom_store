@@ -93,11 +93,14 @@ export const UserLayout = ({ children }) => {
               </Col>
             )}
 
-            <Col xs={1}>
+            <Col xs={2}>
               <div onClick={handleOnClick}>
                 <Button
-                  style={{ background: "#374151", zIndex: "999" }}
-                  className="shadow-lg mt-1"
+                  style={{
+                    background: "#374151",
+                    zIndex: "999",
+                  }}
+                  className="shadow-lg mt-1 "
                 >
                   {sidemenu ? <AiOutlineMenuFold /> : <AiOutlineMenuUnfold />}
                 </Button>
@@ -105,7 +108,7 @@ export const UserLayout = ({ children }) => {
             </Col>
 
             <Col
-              xs={sidemenu ? 0 : 10}
+              xs={sidemenu ? 0 : 9}
               className="right"
               style={{ display: sidemenu ? "none" : "block" }}
             >
