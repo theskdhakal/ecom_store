@@ -21,7 +21,7 @@ export const Footer = () => {
         </Link>
       </p>
 
-      <h5>All Rights Reserved | GadgetVerse</h5>
+      <h5>All Rights Reserved | Chineko</h5>
     </div>
   );
 };
